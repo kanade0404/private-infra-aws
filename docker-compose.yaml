@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  private_infra:
+    container_name: private_infra_aws
+    build: .
+    working_dir: /private-cloud-aws
+    tty: true
+    volumes:
+      - .:/private-cloud-aws:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: bash
+    environment:
+      HOME: "/private-cloud-aws"
+volumes:
+  gcloud-config:

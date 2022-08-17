@@ -1,0 +1,23 @@
+# EXAMPLE USAGE
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+#
+pre-push:
+  parallel: true
+  commands:
+    secretlint:
+      run: DOCKER_CONTENT_TRUST=0;docker run -v `pwd`:`pwd` -w `pwd` --rm -it secretlint/secretlint secretlint "**/*"
+    tfsec:
+      run: docker compose exec private_infra tfsec .
+    actionlint:
+      run: docker compose exec private_infra ./actionlint
+
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: docker compose exec private_infra terraform fmt -recursive -check
+    lint:
+      run: docker compose exec private_infra tflint
+    validate:
+      run: docker compose exec private_infra terraform validate
