@@ -1,6 +1,6 @@
 FROM hashicorp/terraform:1.2.7 AS terraform
 
-FROM ubuntu:20.04 AS aws
+FROM ubuntu:22.04 AS aws
 
 RUN apt update && \
     apt install -y unzip curl && \
@@ -9,7 +9,7 @@ RUN apt update && \
     ./aws/install && \
     rm -rf awscliv2.zip
 
-FROM ubuntu:20.04 AS base
+FROM ubuntu:22.04 AS base
 RUN apt update && \
     apt install -y unzip curl && \
     curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash && \
@@ -19,7 +19,7 @@ RUN apt update && \
     curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | sudo -E bash && \
     apt install -y lefthook
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 COPY --from=terraform /bin/terraform /bin/terraform
 COPY --from=aws /usr/local/bin/aws /usr/local/bin/aws
