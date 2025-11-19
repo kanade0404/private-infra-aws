@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:1.13.5 AS terraform
+FROM hashicorp/terraform:1.14.0 AS terraform
 
 FROM ubuntu:24.04 AS aws
 
