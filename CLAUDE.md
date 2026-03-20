@@ -12,7 +12,7 @@ AWS infrastructure managed with OpenTofu (Terraform 互換)。Region: ap-northea
 
 ### ディレクトリ構成
 
-```
+```text
 environments/
 ├── management/        # 管理アカウント（Organizations, SSO, state bucket）
 ├── personal-dev/      # 個人プロジェクト 開発環境
@@ -63,7 +63,9 @@ terraform-docs markdown table environments/management
 - **pre-commit** (parallel): `tofu fmt -recursive -check`, `tflint --recursive`, `tofu validate`（全環境）
 - **pre-push** (parallel): `secretlint`, `trivy config`
 
-## ツール（flake.nix で管理）
+## ツール
+
+### flake.nix で管理
 
 - OpenTofu — IaC（Terraform 互換、コマンドは `tofu`）
 - TFLint — Terraform リンター
@@ -71,4 +73,8 @@ terraform-docs markdown table environments/management
 - terraform-docs — ドキュメント自動生成
 - AWS CLI v2
 - Lefthook — Git hooks
-- Renovate — 依存関係の自動更新
+- Node.js — secretlint 実行用
+
+### 外部サービス
+
+- Renovate — 依存関係の自動更新（GitHub App）

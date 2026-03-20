@@ -20,6 +20,7 @@
             terraform-docs
             awscli2
             lefthook
+            nodejs
           ];
         };
       });
